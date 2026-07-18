@@ -1,10 +1,10 @@
+
 "use client";
 
 import { useState, useEffect, useRef } from "react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
-// Testimonial data
 const testimonials = [
   {
     id: 1,
@@ -50,96 +50,55 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [visibleTestimonials, setVisibleTestimonials] = useState([]);
-  const intervalRef = useRef(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Function to get visible testimonials based on active index
-  const updateVisibleTestimonials = (index) => {
-    const totalTestimonials = testimonials.length;
+  const total = testimonials.length;
 
-    // Calculate previous, current and next indices with wrapping
-    const prevIndex = (index - 1 + totalTestimonials) % totalTestimonials;
-    const nextIndex = (index + 1) % totalTestimonials;
-
-    setVisibleTestimonials([
-      testimonials[prevIndex],
-      testimonials[index],
-      testimonials[nextIndex],
-    ]);
+  const startInterval = () => {
+    stopInterval();
+    intervalRef.current = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % total);
+    }, 5000);
   };
 
-  // Initialize visible testimonials
-  useEffect(() => {
-    updateVisibleTestimonials(activeIndex);
-
-    // Auto-rotate testimonials
-    intervalRef.current = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, []);
-
-  // Update visible testimonials when active index changes
-  useEffect(() => {
-    updateVisibleTestimonials(activeIndex);
-  }, [activeIndex]);
-
-  // Handle navigation
-  const goToPrev = () => {
-    setActiveIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
-    );
-
-    // Reset interval timer when manually navigating
+  const stopInterval = () => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
-      intervalRef.current = setInterval(() => {
-        setActiveIndex((prev) => (prev + 1) % testimonials.length);
-      }, 5000);
     }
+  };
+
+  useEffect(() => {
+    startInterval();
+    return () => stopInterval();
+  }, []);
+
+  const goToPrev = () => {
+    setActiveIndex((prev) => (prev - 1 + total) % total);
+    startInterval();
   };
 
   const goToNext = () => {
-    setActiveIndex((prev) => (prev + 1) % testimonials.length);
-
-    // Reset interval timer when manually navigating
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = setInterval(() => {
-        setActiveIndex((prev) => (prev + 1) % testimonials.length);
-      }, 5000);
-    }
+    setActiveIndex((prev) => (prev + 1) % total);
+    startInterval();
   };
 
-  const goToSlide = (index) => {
+  const goToSlide = (index: number) => {
     setActiveIndex(index);
-
-    // Reset interval timer when manually navigating
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = setInterval(() => {
-        setActiveIndex((prev) => (prev + 1) % testimonials.length);
-      }, 5000);
-    }
+    startInterval();
   };
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12">
+    <section className="py-16 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-gray-900">
           What Our Clients Say
         </h2>
 
-        <div className="relative">
+        <div className="relative max-w-5xl mx-auto px-4 md:px-12">
           {/* Navigation buttons */}
           <button
             onClick={goToPrev}
-            className="absolute left-2 md:left-0 top-1/2 -translate-y-1/2 z-30 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 focus:outline-none block md:block"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-30 bg-white rounded-full p-2 shadow-md border border-gray-100 hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#00418d]"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="w-6 h-6 text-[#00418d]" />
@@ -147,89 +106,87 @@ export default function TestimonialsSection() {
 
           <button
             onClick={goToNext}
-            className="absolute right-2 md:right-0 top-1/2 -translate-y-1/2 z-30 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 focus:outline-none block md:block"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-30 bg-white rounded-full p-2 shadow-md border border-gray-100 hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#00418d]"
             aria-label="Next testimonial"
           >
             <ChevronRight className="w-6 h-6 text-[#00418d]" />
           </button>
 
-          {/* Testimonial carousel */}
-          <div className="flex justify-center items-center gap-4 mb-8 overflow-hidden px-2 sm:px-4 md:px-6 md:h-[350px]">
-            {visibleTestimonials.map((testimonial, index) => (
-              <div
-                key={testimonial.id}
-                className={`
-  bg-[#00418d] rounded-lg text-white transition-all duration-500 flex flex-col justify-start
+          {/* Testimonial container */}
+          <div className="flex justify-center items-center gap-6 mb-8 md:h-[420px]">
+            {testimonials.map((testimonial, idx) => {
+              const prevIdx = (activeIndex - 1 + total) % total;
+              const nextIdx = (activeIndex + 1) % total;
 
-  ${
-    index === 1
-      ? "w-full max-w-sm md:max-w-none md:w-[50%] px-5 py-4 md:p-6 shadow-lg"
-      : "hidden md:flex md:w-[25%] p-3 opacity-70 shadow-md"
-  }
-`}
-              >
-                <div className="flex flex-col items-center mb-4">
-                  <div
-                    className={`rounded-full overflow-hidden mb-3 border-2 border-white
-                      ${index === 1
-  ? "w-16 h-16 md:w-20 md:h-20"
-  : "w-12 h-12"}
-                    `}
-                  >
-                    <Image
-                      src={testimonial.image || "/placeholder.svg"}
-                      alt={testimonial.name}
-                      width={index === 1 ? 80 : 48}
-                      height={index === 1 ? 80 : 48}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <h3
-                    className={`font-bold ${
-                      index === 1 ? "text-xl md:text-lg" : "text-sm"
-                    }`}
-                  >
-                    {testimonial.name}
-                  </h3>
-                  <p
-                    className={`${
-                      index === 1
-  ? "text-sm md:text-base leading-7"
-  : "text-xs"
-                    } text-gray-200`}
-                  >
-                    {testimonial.title}
-                  </p>
-                  <div className="flex mt-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`fill-[#f6c648] text-[#f6c648] ${
-                          index === 1 ? "w-4 h-4" : "w-3 h-3"
-                        }`}
+              const isActive = idx === activeIndex;
+              const isPrev = idx === prevIdx;
+              const isNext = idx === nextIdx;
+
+              if (!isActive && !isPrev && !isNext) return null;
+
+              return (
+                <div
+                  key={testimonial.id}
+                  className={`
+                    bg-[#00418d] rounded-xl text-white transition-all duration-500 ease-in-out flex flex-col items-center justify-between
+                    ${
+                      isActive
+                        ? "w-full md:w-[50%] p-6 md:p-8 shadow-xl opacity-100 scale-100 md:scale-105 z-20 flex"
+                        : "hidden md:flex md:w-[25%] p-5 opacity-50 scale-95 z-10 pointer-events-none"
+                    }
+                  `}
+                >
+                  <div className="flex flex-col items-center w-full text-center">
+                    <div
+                      className={`relative rounded-full overflow-hidden mb-4 border-2 border-white/80 transition-all duration-500 shadow-inner
+                        ${isActive ? "w-20 h-20" : "w-14 h-14"}
+                      `}
+                    >
+                      <Image
+                        src={testimonial.image || "/placeholder.svg"}
+                        alt={testimonial.name}
+                        fill
+                        className="object-cover"
                       />
-                    ))}
+                    </div>
+
+                    {/* Fixed uniform text sizing to eliminate shift animations */}
+                    <h3 className="font-bold text-base md:text-lg text-white">
+                      {testimonial.name}
+                    </h3>
+                    
+                    <p className="text-blue-200/90 text-xs md:text-sm mb-2">
+                      {testimonial.title}
+                    </p>
+
+                    <div className="flex gap-0.5 mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className="fill-[#f6c648] text-[#f6c648] w-4 h-4"
+                        />
+                      ))}
+                    </div>
+
+                    <div className="w-full flex items-center justify-center min-h-[140px] sm:min-h-[120px] md:min-h-[160px]">
+                      <p className={`italic font-light leading-relaxed tracking-wide text-xs md:text-sm opacity-95 ${!isActive ? "line-clamp-4" : ""}`}>
+                        "{testimonial.quote}"
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <p
-                  className={`text-center ${
-                    index === 1 ? "text-sm" : "text-xs"
-                  } ${index !== 1 ? "line-clamp-4" : ""}`}
-                >
-                  "{testimonial.quote}"
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Pagination dots */}
-          <div className="flex justify-center space-x-2">
+          <div className="flex justify-center space-x-2.5">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-colors ${
-                  index === activeIndex ? "bg-[#00418d]" : "bg-gray-300"
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  index === activeIndex ? "bg-[#00418d] w-6" : "bg-gray-300 w-2.5"
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               ></button>
