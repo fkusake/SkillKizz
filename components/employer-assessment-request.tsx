@@ -290,6 +290,16 @@ export default function EmployerAssessmentRequest() {
             skill assessment of specified job candidate.
           </p>
         </div>
+                <div className="flex justify-center gap-4 mt-8">
+          <button
+            className="px-10 py-2 rounded bg-gradient-to-r from-[#4ECDC4] to-[#2d8a84] text-white hover:opacity-90"
+          >
+            Submit
+          </button>
+          <button className="px-10 py-2 rounded bg-[#333333] text-white hover:bg-[#444444]">
+            Reset
+          </button>
+        </div>
       </div>
     </div>
   );

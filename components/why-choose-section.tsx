@@ -1,8 +1,9 @@
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function WhyChooseSection() {
   return (
-    <section className="py-16 text-white relative overflow-hidden">
+    <section className="py-12 md:py-16 text-white relative overflow-hidden">
       {/* Main container with blue background in the middle and white sides */}
       <div className="absolute inset-0 flex">
         {/* Middle section with blue backgrounds */}
@@ -39,15 +40,15 @@ export default function WhyChooseSection() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <h2 className="text-3xl font-bold text-center mb-2">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-2">
           Why Choose{" "}
           <span className="text-white">
             Skill<span className="text-[#f73e5d]">Kwiz</span>
           </span>{" "}
           ?
         </h2>
-        <p className="text-center max-w-3xl mx-auto mb-12 text-sm">
+        <p className="text-center max-w-3xl mx-auto mb-10 md:mb-12 text-sm md:text-base px-4">
           Discover our unique value propositions designed to enhance your
           recruitment strategy.
           <br />
@@ -55,13 +56,51 @@ export default function WhyChooseSection() {
         </p>
 
         {/* Card container with increased height to match image */}
-        <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-16 relative h-[450px] md:h-[400px]">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-4 mb-16 relative md:h-[400px]">
           {/* Skill Library Card - Tilted Left */}
-          <div
-            className="bg-white rounded-lg p-6 text-black max-w-xs w-full md:w-64 md:h-[350px] transform md:absolute md:left-[calc(50%-280px)] md:top-4 hover:-translate-y-2 transition-transform duration-300 shadow-lg z-10"
-            style={{ transform: "rotate(-25deg)" }}
-          >
-            <div className="flex justify-center mb-4">
+      
+          <motion.div
+  initial={{
+    rotate: -25,
+    x: -120,
+    opacity: 0,
+  }}
+  whileInView={{
+    rotate: 0,
+    x: 0,
+    opacity: 1,
+  }}
+  viewport={{ once: true, amount: 0.4 }}
+transition={{
+  type: "spring",
+  stiffness: 80,
+  damping: 18,
+  delay: 0,
+}}
+whileHover={{
+  y: -14,
+  scale: 1.03,
+  transition: {
+    type: "spring",
+    stiffness: 300,
+    damping: 20,
+  },
+}}
+  className="bg-white rounded-lg p-5 md:p-6 text-black max-w-sm w-full md:max-w-xs md:w-64 md:h-[380px] md:absolute md:left-[calc(50%-420px)] md:top-4 shadow-xl hover:shadow-2xl z-10 transition-shadow duration-300"
+>
+            
+            <motion.div
+  className="flex justify-center mb-4"
+  whileHover={{
+    rotate: 8,
+    scale: 1.12,
+  }}
+  transition={{
+    type: "spring",
+    stiffness: 400,
+    damping: 12,
+  }}
+>
               <div className="w-16 h-16 bg-[#c3dfff] rounded-full flex items-center justify-center overflow-hidden">
                 <img
                   src="/images/homepage/books.gif"
@@ -70,7 +109,7 @@ export default function WhyChooseSection() {
                   aria-hidden="true"
                 />
               </div>
-            </div>
+            </motion.div>
             <h3 className="text-[#00418d] text-xl font-bold text-center mb-3">
               Skill Library
             </h3>
@@ -79,11 +118,52 @@ export default function WhyChooseSection() {
               technical, professional, and soft skills for comprehensive
               candidate evaluation.
             </p>
-          </div>
+          </motion.div>
 
           {/* Secure Testing Card - Center */}
-          <div className="bg-white rounded-lg p-6 text-black max-w-xs w-full md:w-64 md:h-[350px] transform md:z-20 hover:-translate-y-2 transition-transform duration-300 shadow-lg md:absolute md:left-[calc(50%-130px)]">
-            <div className="flex justify-center mb-4">
+         
+          <motion.div
+  initial={{
+    y: 60,
+    opacity: 0,
+    scale: 0.9,
+  }}
+  whileInView={{
+    y: 0,
+    opacity: 1,
+    scale: 1,
+  }}
+  viewport={{ once: true, amount: 0.4 }}
+transition={{
+  type: "spring",
+  stiffness: 80,
+  damping: 18,
+  delay: 0.15,
+}}
+whileHover={{
+  y: -14,
+  scale: 1.03,
+  transition: {
+    type: "spring",
+    stiffness: 300,
+    damping: 20,
+  },
+}}
+  className="bg-white rounded-lg p-5 md:p-6 text-black max-w-sm w-full md:max-w-xs md:w-64 md:h-[380px] shadow-xl hover:shadow-2xl md:absolute md:left-[calc(50%-128px)] md:z-20 z-10 transition-shadow duration-300"
+>
+            
+            <motion.div
+  className="flex justify-center mb-4"
+  whileHover={{
+    rotate: 8,
+    scale: 1.12,
+  }}
+  transition={{
+    type: "spring",
+    stiffness: 400,
+    damping: 12,
+  }}
+>
               <div className="w-16 h-16 bg-[#c3dfff] rounded-full flex items-center justify-center overflow-hidden">
                 <img
                   src="/images/homepage/guard.gif"
@@ -92,7 +172,7 @@ export default function WhyChooseSection() {
                   aria-hidden="true"
                 />
               </div>
-            </div>
+            </motion.div>
             <h3 className="text-[#00418d] text-xl font-bold text-center mb-3">
               Secure Testing
             </h3>
@@ -103,14 +183,52 @@ export default function WhyChooseSection() {
               recognition, security numbers, which are then periodically
               validated throughout the test.
             </p>
-          </div>
+          </motion.div>
 
           {/* Flexible Pricing Card - Tilted Right */}
-          <div
-            className="bg-white rounded-lg p-6 text-black max-w-xs w-full md:w-64 md:h-[350px] transform md:absolute md:right-[calc(50%-280px)] md:top-4 hover:-translate-y-2 transition-transform duration-300 shadow-lg z-10"
-            style={{ transform: "rotate(25deg)" }}
-          >
-            <div className="flex justify-center mb-4">
+          
+          <motion.div
+  initial={{
+    rotate: 25,
+    x: 120,
+    opacity: 0,
+  }}
+  whileInView={{
+    rotate: 0,
+    x: 0,
+    opacity: 1,
+  }}
+  viewport={{ once: true, amount: 0.4 }}
+transition={{
+  type: "spring",
+  stiffness: 80,
+  damping: 18,
+  delay: 0.3,
+}}
+whileHover={{
+  y: -14,
+  scale: 1.03,
+  transition: {
+    type: "spring",
+    stiffness: 300,
+    damping: 20,
+  },
+}}
+  className="bg-white rounded-lg p-5 md:p-6 text-black max-w-sm w-full md:max-w-xs md:w-64  md:h-[380px] md:absolute md:right-[calc(50%-420px)] md:top-4 shadow-xl hover:shadow-2xl z-10 transition-shadow duration-300"
+>
+            
+            <motion.div
+  className="flex justify-center mb-4"
+  whileHover={{
+    rotate: 8,
+    scale: 1.12,
+  }}
+  transition={{
+    type: "spring",
+    stiffness: 400,
+    damping: 12,
+  }}
+>
               <div className="w-16 h-16 bg-[#c3dfff] rounded-full flex items-center justify-center overflow-hidden">
                 <img
                   src="/images/homepage/dollar.gif"
@@ -119,7 +237,7 @@ export default function WhyChooseSection() {
                   aria-hidden="true"
                 />
               </div>
-            </div>
+            </motion.div>
             <h3 className="text-[#00418d] text-xl font-bold text-center mb-3">
               Flexible Pricing
             </h3>
@@ -129,7 +247,7 @@ export default function WhyChooseSection() {
               organizations can benefit from our Enterprise plan with unlimited
               testing and custom features.
             </p>
-          </div>
+          </motion.div>
         </div>
 
         <div className="text-center mt-32 md:mt-24 relative z-20">

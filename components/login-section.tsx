@@ -205,7 +205,8 @@ export default function LoginSection() {
                     <input type="checkbox" className="h-4 w-4 mr-2" />
                     Remember me
                   </label>
-                  <a href="#" className="text-white hover:underline">
+                  <br />
+                  <a href="#" className="text-white">
                     Forget Password?
                   </a>
                 </div>

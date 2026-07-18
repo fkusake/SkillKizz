@@ -8,7 +8,7 @@ export default function ScheduleAssessment() {
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   return (
-    <div className="text-white">
+   <div className="text-white py-4 pb-20">
       <h1 className="text-3xl font-semibold text-center mb-2">
         Schedule Assessment
       </h1>

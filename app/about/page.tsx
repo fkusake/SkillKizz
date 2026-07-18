@@ -1,7 +1,17 @@
+
+"use client";
 import Image from "next/image";
+import { useRef, useState } from "react";
 import { Play } from "lucide-react";
 
 export default function AboutPage() {
+   const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  const playVideo = () => {
+    videoRef.current?.play();
+    setPlaying(true);
+  };
   return (
     <>
       {/* Hero Section */}
@@ -137,29 +147,31 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="w-full md:w-1/2 flex justify-center gap-4">
-              <Image
-                src="/images/aboutpage/about_who_we_are-0.png"
-                alt="Team collaboration"
-                height={200}
-                width={100}
-                className="rounded-lg w-auto h-auto animate-float-delay-2"
-              />
-              <Image
-                src="/images/aboutpage/about_who_we_are-1.png"
-                alt="Team collaboration"
-                height={200}
-                width={100}
-                className="rounded-lg w-auto h-auto animate-float-delay-1"
-              />
-              <Image
-                src="/images/aboutpage/about_who_we_are-2.png"
-                alt="Team collaboration"
-                height={200}
-                width={100}
-                className="rounded-lg w-auto h-auto animate-float-delay-2"
-              />
-            </div>
+<div className="w-full md:w-1/2 flex justify-center items-end gap-2 sm:gap-3 md:gap-4 overflow-hidden">
+  <Image
+    src="/images/aboutpage/about_who_we_are-0.png"
+    alt="Team collaboration"
+    width={100}
+    height={200}
+    className="w-[26%] sm:w-[24%] md:w-auto h-auto rounded-lg animate-float-delay-2"
+  />
+
+  <Image
+    src="/images/aboutpage/about_who_we_are-1.png"
+    alt="Team collaboration"
+    width={100}
+    height={200}
+    className="w-[26%] sm:w-[24%] md:w-auto h-auto rounded-lg animate-float-delay-1"
+  />
+
+  <Image
+    src="/images/aboutpage/about_who_we_are-2.png"
+    alt="Team collaboration"
+    width={100}
+    height={200}
+    className="w-[26%] sm:w-[24%] md:w-auto h-auto rounded-lg animate-float-delay-2"
+  />
+</div>
           </div>
         </div>
       </section>
@@ -206,28 +218,35 @@ export default function AboutPage() {
 
       {/* Video Section */}
       <section className="w-full bg-white py-12">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="relative">
-            <video
-              className="w-full h-auto rounded-lg"
-              controls
-              preload="none"
-              poster="/images/aboutpage/about_video.png"
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="relative rounded-lg overflow-hidden">
+
+          <video
+            ref={videoRef}
+            className="w-full h-auto"
+            poster="/images/aboutpage/video_poster.png"
+            controls={playing}
+          >
+            <source
+              src="/images/aboutpage/about_video.mp4"
+              type="video/mp4"
+            />
+          </video>
+
+          {!playing && (
+            <button
+              onClick={playVideo}
+              className="absolute inset-0 flex items-center justify-center bg-black/20"
             >
-              <source
-                src="/images/aboutpage/about_video.mp4"
-                type="video/mp4"
-              />
-              Your browser does not support the video tag.
-            </video>
-            {/* <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-20 h-20 bg-[#00418d] rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-90 transition-all">
-                <Play className="w-10 h-10 text-white ml-1" />
+              <div className="w-24 h-24 rounded-full bg-[#00418d] flex items-center justify-center shadow-xl hover:scale-105 transition">
+                <Play className="w-12 h-12 text-white fill-white ml-1" />
               </div>
-            </div> */}
-          </div>
+            </button>
+          )}
+
         </div>
-      </section>
+      </div>
+    </section>
     </>
   );
 }

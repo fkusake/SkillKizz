@@ -70,7 +70,7 @@ export default function LetterCarousel() {
     <div className="w-[100%] mx-auto">
       {/* <div className="relative overflow-hidden rounded-xl bg-white shadow-lg"> */}
       <div className="relative overflow-hidden rounded-none shadow-lg">
-        <div className="relative h-[800px] w-full">
+        <div className="relative h-[500px] sm:h-[700px] md:h-[800px] w-full">
           {slides.map((slide, index) => (
             <div
               key={index}
@@ -83,25 +83,26 @@ export default function LetterCarousel() {
               }`}
             >
               {/* Background Image with Overlay */}
-              <div className="absolute inset-0 z-0">
-                <Image
-                  src={slide.backgroundImage || "/placeholder.svg"}
-                  alt={`${slide.title} background`}
-                  fill
-                  className="object-cover"
-                  priority={index === 0}
-                />
-                <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px]"></div>
-              </div>
+              <div className="absolute inset-0 z-0 flex items-center justify-center">
+  <Image
+    src={slide.backgroundImage}
+    alt={`${slide.title} background`}
+    width={1920}
+    height={1080}
+    priority={index === 0}
+    className="w-full h-auto md:h-full md:object-cover object-contain"
+  />
+   <div className="absolute inset-0 bg-black/30 backdrop-blur-[0px]"></div>
+</div>
 
               <div className="flex flex-col h-full relative z-10">
                 {/* Letters row */}
                 {/* <div className="flex justify-center items-center py-8 gap-4"> */}
-                <div className="flex justify-center items-center mt-28 gap-4">
+                <div className="flex justify-center items-center mt-24 sm:mt-28 gap-2 sm:gap-3 md:gap-4 px-4">
                   {slide.letters.map((letter, letterIndex) => (
                     <div
                       key={letterIndex}
-                      className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gradient-to-br from-[#00418d] to-[#0066cc] text-white text-3xl md:text-4xl font-bold rounded-lg shadow-md transform hover:scale-110 transition-transform"
+                      className="w-10 h-10 sm:w-14 sm:h-14 md:w-20 md:h-20 flex items-center justify-center bg-gradient-to-br from-[#00418d] to-[#0066cc] text-white text-xl sm:text-2xl md:text-4xl font-bold rounded-lg shadow-md transition-transform hover:scale-110"
                     >
                       {letter}
                     </div>
@@ -109,9 +110,9 @@ export default function LetterCarousel() {
                 </div>
 
                 {/* Content */}
-    <div className="text-center px-6 py-4">
+    <div className="text-center px-6 sm:px-10 py-6 max-w-4xl mx-auto">
   <h3
-    className="text-2xl font-bold text-white mb-2"
+  className="text-xl sm:text-2xl md:text-4xl font-bold text-white mb-2 px-2"
     style={{ fontFamily: "Georgia, serif" }}
   >
     {slide.title}
@@ -125,17 +126,17 @@ export default function LetterCarousel() {
         {/* Navigation buttons */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md z-10"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md z-10"
           aria-label="Previous slide"
         >
-          <ChevronLeft className="h-6 w-6 text-[#00418d]" />
+          <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-[#00418d]" />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md z-10"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-md z-10"
           aria-label="Next slide"
         >
-          <ChevronRight className="h-6 w-6 text-[#00418d]" />
+          <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-[#00418d]" />
         </button>
 
         {/* Indicators */}

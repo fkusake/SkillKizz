@@ -7,22 +7,25 @@ export default function AuthenticateSkillsSection() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Left side stacked images */}
           <div className="relative w-full md:w-1/3 h-[400px] md:h-[500px]">
-            <div className="absolute top-0 left-0 w-[80%] h-[80%] transform -rotate-12 hover:-rotate-6 transition-transform duration-300 z-10">
+            
+            <div className="absolute top-2 left-0 w-[72%] h-[72%] animate-float-left-top group z-20">
+
               <Image
                 src="/images/homepage/skills_1.png"
                 alt="Professional working at night"
                 width={350}
                 height={500}
-                className="rounded-lg object-cover w-full h-full"
+                className="w-full h-full object-cover rounded-2xl shadow-2xl transition-all duration-500 group-hover:-translate-y-4 group-hover:scale-105"
               />
             </div>
-            <div className="absolute bottom-0 left-[10%] w-[80%] h-[80%] transform -rotate-6 hover:rotate-0 transition-transform duration-300">
+            <div className="absolute bottom-0 left-[18%] w-[82%] h-[82%] animate-float-left-bottom group">
+
               <Image
                 src="/images/homepage/skills_2.png"
                 alt="Professional in tech environment"
                 width={350}
                 height={500}
-                className="rounded-lg object-cover w-full h-full"
+               className="w-full h-full object-cover rounded-2xl shadow-lg opacity-95 transition-all duration-500 group-hover:translate-y-2"
               />
             </div>
           </div>
@@ -44,22 +47,43 @@ export default function AuthenticateSkillsSection() {
 
           {/* Right side stacked images */}
           <div className="relative w-full md:w-1/3 h-[400px] md:h-[500px]">
-            <div className="absolute top-0 right-0 w-[80%] h-[80%] transform rotate-9 hover:rotate-6 transition-transform duration-300 z-10">
+            <div className="absolute top-2 right-0 w-[72%] h-[72%] animate-float-right-top group z-20">
               <Image
                 src="/images/homepage/skills_3.png"
                 alt="Professional at workstation"
                 width={350}
                 height={500}
-                className="rounded-lg object-cover w-full h-full"
+                className="
+w-full
+h-full
+object-cover
+rounded-2xl
+shadow-2xl
+transition-all
+duration-500
+group-hover:-translate-y-4
+group-hover:scale-105
+"
               />
             </div>
-            <div className="absolute bottom-0 right-[10%] w-[80%] h-[80%] transform rotate-6 hover:rotate-0 transition-transform duration-300">
+           
+            <div className="absolute bottom-0 right-[18%] w-[82%] h-[82%] animate-float-right-bottom group">
               <Image
                 src="/images/homepage/skills_4.png"
                 alt="Business professional looking at digital interface"
                 width={350}
                 height={500}
-                className="rounded-lg object-cover w-full h-full"
+                className="
+w-full
+h-full
+object-cover
+rounded-2xl
+shadow-lg
+opacity-95
+transition-all
+duration-500
+group-hover:translate-y-2
+"
               />
             </div>
           </div>

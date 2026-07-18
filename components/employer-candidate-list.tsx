@@ -63,17 +63,17 @@ export default function EmployerCandidateList() {
   return (
     <div className="text-white">
       {/* Search Bar */}
-      <div className="bg-[#1a2b4a] rounded-full overflow-hidden mb-6">
-        <div className="grid grid-cols-4">
-          <div className="col-span-1 flex items-center px-4 py-3 border-r border-gray-600">
+      <div className="bg-[#1a2b4a] rounded-2xl md:rounded-full overflow-hidden mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-gray-600">
+          <div className="col-span-1 flex items-center px-4 py-3">
             <Search className="w-5 h-5 mr-2 text-gray-400" />
             <input
               type="text"
-              placeholder="Candidate Email ID/Phone/Skill"
+              placeholder="Search Candidate"
               className="bg-transparent w-full focus:outline-none text-white"
             />
           </div>
-          <div className="flex items-center px-4 py-3 border-r border-gray-600">
+          <div className="flex items-center px-4 py-3">
             <MapPin className="w-5 h-5 mr-2 text-gray-400" />
             <input
               type="text"
@@ -81,7 +81,7 @@ export default function EmployerCandidateList() {
               className="bg-transparent w-full focus:outline-none text-white"
             />
           </div>
-          <div className="flex items-center px-4 py-3 border-r border-gray-600">
+          <div className="flex items-center px-4 py-3">
             <div className="relative w-full">
               <select className="w-full bg-transparent appearance-none focus:outline-none text-white">
                 <option value="">Job Family</option>
@@ -107,18 +107,18 @@ export default function EmployerCandidateList() {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-between px-4 py-3">
-            <button className="text-white hover:text-gray-300">Clear</button>
-            <button className="bg-[#00bcd4] text-white px-6 py-1 rounded-full hover:bg-[#00a5bb]">
+          <div className="flex flex-col sm:flex-row items-center gap-3 px-4 py-4">
+            <button className="text-gray-300 hover:text-white w-full sm:w-auto text-center">Clear</button>
+            <button className="bg-[#00bcd4] text-white px-8 py-2 rounded-full w-full sm:w-auto">
               Search
             </button>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {/* Filter Section */}
-        <div className="col-span-1">
+       <div className="md:col-span-1">
           <div className="bg-[#4a63b3] rounded-lg overflow-hidden">
             <div className="bg-[#4a63b3] p-4 text-xl font-medium">Filter</div>
 
@@ -209,11 +209,11 @@ export default function EmployerCandidateList() {
         </div>
 
         {/* Candidate List */}
-        <div className="col-span-3 space-y-4">
+       <div className="md:col-span-3 space-y-4">
           {candidates.map((candidate) => (
             <div key={candidate.id} className="bg-[#4a63b3]/80 rounded-lg p-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div className="flex items-start md:items-center">
                   <div
                     className={`w-12 h-12 rounded-full ${candidate.color} flex items-center justify-center text-white text-2xl font-bold mr-4`}
                   >
@@ -222,15 +222,15 @@ export default function EmployerCandidateList() {
                   <div>
                     <h3 className="text-xl font-medium">{candidate.name}</h3>
                     <p className="text-gray-300">{candidate.company}</p>
-                    <div className="flex items-center mt-1">
+                    <div className="flex flex-col md:flex-row md:items-center mt-2 gap-2 md:gap-0">
                       <p className="text-sm">
                         Skills: {candidate.skills.join(", ")}
                       </p>
-                      <div className="mx-4 h-4 border-l border-gray-400"></div>
+                      <div className="hidden md:block mx-4 h-4 border-l border-gray-400"></div>
                       <p className="text-sm">
                         Percentile Score: {candidate.percentile}
                       </p>
-                      <div className="mx-4 h-4 border-l border-gray-400"></div>
+                      <div className="hidden md:block mx-4 h-4 border-l border-gray-400"></div>
                       <div className="flex items-center">
                         <MapPin className="w-4 h-4 mr-1" />
                         <p className="text-sm">{candidate.location}</p>
@@ -244,7 +244,7 @@ export default function EmployerCandidateList() {
                 <a
   href={"/files/dummy-file.pdf"}
   download
-  className="bg-[#00bcd4] text-white px-4 py-2 rounded-lg hover:bg-[#00a5bb]"
+   className="w-full md:w-auto text-center bg-[#00bcd4] text-white px-4 py-2 rounded-lg hover:bg-[#00a5bb]"
   onClick={(e) => e.stopPropagation()}
 >
   view report

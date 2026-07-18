@@ -10,17 +10,77 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' },
-        },
-      },
-      animation: {
-        float: 'float 4s ease-in-out infinite',
-        'float-delay-1': 'float 4s ease-in-out infinite 1s',
-        'float-delay-2': 'float 4s ease-in-out infinite 2s',
-      },
+
+     keyframes: {
+  floatLeftTop: {
+    "0%,100%": {
+      transform: "translateY(0px) rotate(-12deg)",
+    },
+    "25%": {
+      transform: "translateY(-12px) rotate(-10deg)",
+    },
+    "50%": {
+      transform: "translateY(-18px) rotate(-13deg)",
+    },
+    "75%": {
+      transform: "translateY(-8px) rotate(-11deg)",
+    },
+  },
+
+  floatLeftBottom: {
+    "0%,100%": {
+      transform: "translateY(0px) rotate(-6deg)",
+    },
+    "25%": {
+      transform: "translateY(8px) rotate(-5deg)",
+    },
+    "50%": {
+      transform: "translateY(15px) rotate(-7deg)",
+    },
+    "75%": {
+      transform: "translateY(5px) rotate(-4deg)",
+    },
+  },
+
+  floatRightTop: {
+    "0%,100%": {
+      transform: "translateY(0px) rotate(9deg)",
+    },
+    "25%": {
+      transform: "translateY(-10px) rotate(7deg)",
+    },
+    "50%": {
+      transform: "translateY(-18px) rotate(11deg)",
+    },
+    "75%": {
+      transform: "translateY(-6px) rotate(8deg)",
+    },
+  },
+
+  floatRightBottom: {
+    "0%,100%": {
+      transform: "translateY(0px) rotate(6deg)",
+    },
+    "25%": {
+      transform: "translateY(10px) rotate(5deg)",
+    },
+    "50%": {
+      transform: "translateY(16px) rotate(8deg)",
+    },
+    "75%": {
+      transform: "translateY(6px) rotate(4deg)",
+    },
+  },
+},
+
+animation: {
+  "float-left-top": "floatLeftTop 7s ease-in-out infinite",
+  "float-left-bottom": "floatLeftBottom 8s ease-in-out infinite",
+  "float-right-top": "floatRightTop 7.5s ease-in-out infinite",
+  "float-right-bottom": "floatRightBottom 8.5s ease-in-out infinite",
+},
+
+
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

@@ -83,8 +83,8 @@ export default function ServicesPage() {
         />
       </div>
 
-      <div className="relative z-10 pt-24">
-        <div className="container mx-auto px-4 max-w-5xl">
+     <div className="relative z-10 pt-24 pb-16 md:pb-24">
+        <div className="container mx-auto px-4 max-w-5xl pb-12">
           {!isLoggedIn ? (
             // Login Form
             <div className="bg-gradient-to-r from-[#3a4a7b]/90 to-[#9ba3b9]/90 rounded-lg p-8 backdrop-blur-sm max-w-md mx-auto">

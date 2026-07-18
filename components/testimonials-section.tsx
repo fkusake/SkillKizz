@@ -131,7 +131,7 @@ export default function TestimonialsSection() {
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-12">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12">
           What Our Clients Say
         </h2>
 
@@ -139,7 +139,7 @@ export default function TestimonialsSection() {
           {/* Navigation buttons */}
           <button
             onClick={goToPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-30 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 focus:outline-none hidden md:block"
+            className="absolute left-2 md:left-0 top-1/2 -translate-y-1/2 z-30 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 focus:outline-none block md:block"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="w-6 h-6 text-[#00418d]" />
@@ -147,30 +147,33 @@ export default function TestimonialsSection() {
 
           <button
             onClick={goToNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-30 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 focus:outline-none hidden md:block"
+            className="absolute right-2 md:right-0 top-1/2 -translate-y-1/2 z-30 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 focus:outline-none block md:block"
             aria-label="Next testimonial"
           >
             <ChevronRight className="w-6 h-6 text-[#00418d]" />
           </button>
 
           {/* Testimonial carousel */}
-          <div className="flex justify-center items-center gap-4 mb-8 overflow-hidden px-4 h-[400px] md:h-[350px]">
+          <div className="flex justify-center items-center gap-4 mb-8 overflow-hidden px-2 sm:px-4 md:px-6 md:h-[350px]">
             {visibleTestimonials.map((testimonial, index) => (
               <div
                 key={testimonial.id}
                 className={`
-                  bg-[#00418d] rounded-lg text-white transition-all duration-500 flex flex-col justify-start
-                  ${
-                    index === 1
-                      ? "w-full md:w-[50%] h-[350px] p-6 z-20 shadow-lg"
-                      : "w-0 md:w-[25%] h-[250px] p-3 opacity-70 z-10 shadow-md"
-                  }
-                `}
+  bg-[#00418d] rounded-lg text-white transition-all duration-500 flex flex-col justify-start
+
+  ${
+    index === 1
+      ? "w-full max-w-sm md:max-w-none md:w-[50%] px-5 py-4 md:p-6 shadow-lg"
+      : "hidden md:flex md:w-[25%] p-3 opacity-70 shadow-md"
+  }
+`}
               >
                 <div className="flex flex-col items-center mb-4">
                   <div
                     className={`rounded-full overflow-hidden mb-3 border-2 border-white
-                      ${index === 1 ? "w-20 h-20" : "w-12 h-12"}
+                      ${index === 1
+  ? "w-16 h-16 md:w-20 md:h-20"
+  : "w-12 h-12"}
                     `}
                   >
                     <Image
@@ -183,14 +186,16 @@ export default function TestimonialsSection() {
                   </div>
                   <h3
                     className={`font-bold ${
-                      index === 1 ? "text-lg" : "text-sm"
+                      index === 1 ? "text-xl md:text-lg" : "text-sm"
                     }`}
                   >
                     {testimonial.name}
                   </h3>
                   <p
                     className={`${
-                      index === 1 ? "text-sm" : "text-xs"
+                      index === 1
+  ? "text-sm md:text-base leading-7"
+  : "text-xs"
                     } text-gray-200`}
                   >
                     {testimonial.title}
